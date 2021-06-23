@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const dbModel = require("../models/workout");
+const dbModel = require("../models");
 
 router.get("/api/workouts", (req, res) => {
-    dbModel.find()
+    dbModel.Workout.find()
         .then(data => {
             res.json(data)
         })
@@ -12,7 +12,7 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.post("/api/workouts", (req, res) => {
-    dbModel.create({})
+    dbModel.Workout.create({})
         .then(data => res.json(data))
         .catch(err => {
             res.json(err)
@@ -20,7 +20,7 @@ router.post("/api/workouts", (req, res) => {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-    dbModel.find()
+    dbModel.Workout.find()
         .then(data => {
             res.json(data)
         })
@@ -30,7 +30,7 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 router.post("/api/workouts/range", (req, res) => {
-    dbModel.create({})
+    dbModel.Workout.create({})
         .then(data => res.json(data))
         .catch(err => {
             res.json(err)
@@ -38,7 +38,7 @@ router.post("/api/workouts/range", (req, res) => {
 });
 
 router.put("/api/workouts/:id", ({ body, params }, res) => {
-    dbModel.findByIdAndUpdate(
+    dbModel.Workout.findByIdAndUpdate(
         params.id,
         { $push: { exercises: body } },
         { new: true, runValidators: true }
@@ -50,4 +50,5 @@ router.put("/api/workouts/:id", ({ body, params }, res) => {
             res.json(err)
         })
 });
+
 module.exports = router;
